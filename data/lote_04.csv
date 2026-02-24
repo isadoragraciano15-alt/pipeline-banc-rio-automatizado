@@ -1,6 +1,0 @@
-id_transacao,data_hora,id_origem,id_destino,valor,categoria,metodo_pagamento,status_dispositivo
-TXP401,2024-05-20 08:00:00,30123,40567,125.50,Alimentação,Pix,verificado
-TXP402,2024-05-20 09:15:30,31456,41678,89.90,Transporte,Débito,verificado
-TXP403,2024-05-20 10:30:12,32678,42789,210.00,Saúde,Cartão de Crédito,verificado
-TXP404,2024-05-20 11:45:00,33890,43890,45.00,Lazer,Pix,verificado
-TXP405,2024-05-20 13:00:45,34901,44901,300.20,Educação,Boleto,verificado
