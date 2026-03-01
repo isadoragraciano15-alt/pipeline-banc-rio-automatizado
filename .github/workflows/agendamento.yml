@@ -30,6 +30,7 @@ jobs:
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          git add data/ processados/
+          # O asterisco garante que ele rastreie os arquivos dentro das pastas
+          git add data/* processados/*
           git commit -m "Arquivando arquivos processados [skip ci]" || echo "Sem mudanças"
           git push
