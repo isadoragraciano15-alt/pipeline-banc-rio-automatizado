@@ -26,12 +26,10 @@ jobs:
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: python script_validacao.py
 
-      # --- O PASSO QUE ESTAVA FALTANDO AQUI ---
       - name: Salvar alterações (Arquivar processados)
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          git add data/processados/ *.csv
-          # O comando abaixo evita que o workflow quebre se não houver nada novo para salvar
-          git commit -m "Arquivando arquivos processados [skip ci]" || echo "Sem mudanças para salvar"
+          git add data/ processados/
+          git commit -m "Arquivando arquivos processados [skip ci]" || echo "Sem mudanças"
           git push
