@@ -2,14 +2,16 @@ name: Pedagio Automático
 
 on:
   schedule:
-    - cron: '*/30 * * * *' # Roda a cada 30 minutos
-  workflow_dispatch: # Permite rodar manualmente para testar
+    - cron: '*/30 * * * *' 
+  workflow_dispatch: 
 
 jobs:
   rodar-pedagio:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
       - name: Configurar Python
         uses: actions/setup-python@v4
         with:
@@ -23,3 +25,13 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: python script_validacao.py
+
+      # --- O PASSO QUE ESTAVA FALTANDO AQUI ---
+      - name: Salvar alterações (Arquivar processados)
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add data/processados/ *.csv
+          # O comando abaixo evita que o workflow quebre se não houver nada novo para salvar
+          git commit -m "Arquivando arquivos processados [skip ci]" || echo "Sem mudanças para salvar"
+          git push

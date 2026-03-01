@@ -3,14 +3,19 @@ import os
 from database import subir_dados
 import shutil
 
-# 1. Configuração de caminhos
+# 1. Configuração de caminhos DINÂMICA
 pasta_data = 'data'
-arquivos_lotes = ['lote_01.csv', 'lote_02.csv', 'lote_03.csv']
 
-print("--- Iniciando o Pedágio de Dados (Data Quality) ---")
+# Em vez de lista fixa, pegamos todos os CSVs da pasta
+arquivos_lotes = [f for f in os.listdir(pasta_data) if f.endswith('.csv')]
+
+print(f"--- Iniciando: {len(arquivos_lotes)} arquivos encontrados ---")
 
 for arquivo in arquivos_lotes:
     caminho_arquivo = os.path.join(pasta_data, arquivo)
+    
+    # Adicione este log para debugar no GitHub
+    print(f"Lendo arquivo: {caminho_arquivo}")
     
     if os.path.exists(caminho_arquivo):
         print(f"\nProcessando: {arquivo}")
